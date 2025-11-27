@@ -14,7 +14,18 @@ func New() *Archiver {
 }
 
 func (a *Archiver) Archive(url string) (*models.Bookmark, error) {
-	article, err := readability.FromURL(url, 30*time.Second)
+	var article readability.Article
+	var err error
+
+	// Retry logic: 3 attempts
+	for i := 0; i < 3; i++ {
+		article, err = readability.FromURL(url, 30*time.Second)
+		if err == nil {
+			break
+		}
+		time.Sleep(1 * time.Second)
+	}
+
 	if err != nil {
 		return nil, err
 	}

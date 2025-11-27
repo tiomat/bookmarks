@@ -9,5 +9,6 @@ type Bookmark struct {
 	Excerpt   string    `json:"excerpt"`
 	Content   string    `json:"content"` // HTML content
 	Comment   string    `json:"comment"`
+	Deleted   bool      `json:"deleted"`
 	CreatedAt time.Time `json:"created_at"`
 }

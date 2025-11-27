@@ -104,9 +104,24 @@ func main() {
 		if err != nil {
 			return c.String(http.StatusNotFound, "Bookmark not found")
 		}
+
+		if bookmark.Deleted {
+			return c.Render(http.StatusOK, "deleted.html", map[string]interface{}{
+				"Bookmark": bookmark,
+			})
+		}
+
 		return c.Render(http.StatusOK, "detail.html", map[string]interface{}{
 			"Bookmark": bookmark,
 		})
+	})
+
+	e.POST("/bookmarks/:id/delete", func(c echo.Context) error {
+		id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
+		if err := db.DeleteBookmark(id); err != nil {
+			return c.String(http.StatusInternalServerError, "Failed to delete bookmark")
+		}
+		return c.Redirect(http.StatusSeeOther, "/")
 	})
 
 	e.POST("/bookmarks/:id/comment", func(c echo.Context) error {
