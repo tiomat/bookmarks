@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-8 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-800">My Archive</h1>
+            <a href="/" class="text-blue-600 hover:underline">Home</a>
+        </header>
+
+        <div class="grid gap-4">
+            {{range .Bookmarks}}
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-semibold mb-2">
+                        <a href="/bookmarks/{{.ID}}" class="text-blue-600 hover:underline">#{{.ID}} {{.Title}}</a>
+                    </h2>
+                    <span class="text-sm text-gray-500">{{.CreatedAt.Format "Jan 02, 2006"}}</span>
+                </div>
+                <p class="text-gray-600 mb-4 line-clamp-3">{{.Excerpt}}</p>
+                {{if .Comment}}
+                <div class="bg-yellow-50 p-3 rounded border border-yellow-200 text-sm text-gray-700">
+                    <strong>Note:</strong> {{.Comment}}
+                </div>
+                {{end}}
+                <div class="mt-4 text-sm text-gray-400 truncate">
+                    Source: <a href="{{.URL}}" target="_blank" class="hover:underline">{{.URL}}</a>
+                </div>
+            </div>
+            {{else}}
+            <p class="text-center text-gray-500">No bookmarks yet.</p>
+            {{end}}
+        </div>
+    </div>
+</body>
+
+</html>
