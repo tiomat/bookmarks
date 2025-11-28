@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"net"
 	"net/http"
 	"strconv"
 	"strings"
@@ -133,5 +134,11 @@ func main() {
 		return c.Redirect(http.StatusSeeOther, "/bookmarks/"+c.Param("id"))
 	})
 
-	e.Logger.Fatal(e.Start(":8080"))
+	// Force IPv4 listener
+	l, err := net.Listen("tcp4", ":8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+	e.Listener = l
+	e.Logger.Fatal(e.Start(""))
 }
