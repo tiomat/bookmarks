@@ -9,6 +9,15 @@ A simple self-hosted service for archiving web pages with the ability to add not
 *   **Paper Notebook Friendly**: Generates a simple incremental ID (e.g., #42) to reference in physical notebooks.
 *   **iOS Integration**: Save directly from iPhone via iOS Shortcuts.
 *   **Dark Mode**: Optional dark theme for comfortable reading.
+## Screenshots
+
+|                             Dark Mode                              |
+| :----------------------------------------------------------------: |
+|      ![List view](assets/screenshots/list.png)<br>_List View_      |
+| ![Detailed view](assets/screenshots/details.png)<br>_Article View_ |
+|       ![Not found](assets/screenshots/deleted.png)<br>_404_        |
+
+
 
 ## Getting Started
 
